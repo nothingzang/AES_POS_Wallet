@@ -63,26 +63,26 @@ public class ToastUtils {
 
     public static void showMessage(final String mess, final int messageType) {
         Log.e("Nothing", mess);
-        String message = "";
-        switch (messageType) {
-            case MessageTag.NORMAL:
-                message = "<font color='white'>" + mess + "</font>";
-                break;
-            case MessageTag.ERROR:
-                message = "<font color='red'>" + mess + "</font>";
-                break;
-            case MessageTag.TIP:
-                message = "<font color='green'>" + mess + "</font>";
-                break;
-            case MessageTag.DATA:
-                message = "<font color='blue'>" + mess + "</font>";
-                break;
-            case MessageTag.WARN:
-                message = "<u><font color='red'>" + mess + "</font></u>";
-                break;
-            default:
-                break;
-        }
-        show(Html.fromHtml(message));
+//        String message = "";
+//        switch (messageType) {
+//            case MessageTag.NORMAL:
+//                message = "<font color='white'>" + mess + "</font>";
+//                break;
+//            case MessageTag.ERROR:
+//                message = "<font color='red'>" + mess + "</font>";
+//                break;
+//            case MessageTag.TIP:
+//                message = "<font color='green'>" + mess + "</font>";
+//                break;
+//            case MessageTag.DATA:
+//                message = "<font color='blue'>" + mess + "</font>";
+//                break;
+//            case MessageTag.WARN:
+//                message = "<u><font color='red'>" + mess + "</font></u>";
+//                break;
+//            default:
+//                break;
+//        }
+//        show(Html.fromHtml(message));
     }
 }

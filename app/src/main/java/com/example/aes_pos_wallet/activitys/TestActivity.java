@@ -182,7 +182,7 @@ public class TestActivity extends BaseActivity {
     private static String powerOn() {
         String snr = "";
         try {
-            RFResult qPResult = S_DeviceInfo.getInstance().getRFCardModule().powerOn(new RFCardType[]{RFCardType.M1CARD}, 10, TimeUnit.SECONDS);
+            RFResult qPResult = S_DeviceInfo.getInstance().getRFCardModule().powerOn(new RFCardType[]{RFCardType.M1CARD}, 60, TimeUnit.SECONDS);
             if (qPResult != null && qPResult.getQpCardType() != null) {
                 ToastUtils.showMessage(AESApplication.getInstance().getString(R.string.msg_RFcard_type) + qPResult.getQpCardType() + "\r\n", MessageTag.DATA);
             } else {
@@ -338,7 +338,6 @@ public class TestActivity extends BaseActivity {
 
     public static String doRead() {
         int block = 4;
-        if (rfcardState()) {
             try {
                 S_DeviceInfo.getInstance().getRFCardModule().authenticateByExtendKey(RFKeyMode.KEYA_0X60, ISOUtils.hex2byte(powerOn()), block, ISOUtils.hex2byte("ffffffffffff"));
                 byte output[] = S_DeviceInfo.getInstance().getRFCardModule().readDataBlock(block);
@@ -348,7 +347,6 @@ public class TestActivity extends BaseActivity {
                 e.printStackTrace();
                 ToastUtils.showMessage(AESApplication.getInstance().getString(R.string.msg_error) + e, MessageTag.ERROR);
             }
-        }
         return null;
     }
 

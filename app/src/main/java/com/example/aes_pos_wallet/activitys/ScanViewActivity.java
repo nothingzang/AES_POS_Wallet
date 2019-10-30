@@ -55,9 +55,13 @@ import com.newland.mtype.module.common.cardreader.CommonCardType;
 import com.newland.mtype.module.common.cardreader.K21CardReaderEvent;
 import com.newland.mtype.module.common.cardreader.OpenCardReaderResult;
 import com.newland.mtype.module.common.cardreader.SearchCardRule;
+import com.newland.mtype.module.common.rfcard.RFCardType;
+import com.newland.mtype.module.common.rfcard.RFResult;
 import com.newland.mtype.module.common.scanner.ScanLightType;
 import com.newland.mtype.module.common.scanner.ScannerListener;
+import com.newland.mtype.util.ISOUtils;
 
+import java.time.chrono.IsoEra;
 import java.util.concurrent.TimeUnit;
 
 public class ScanViewActivity extends Activity {
@@ -424,50 +428,25 @@ public class ScanViewActivity extends Activity {
             @Override
             public void run() {
                 if (isFinishing()) return;
-                ModuleType[] openReaders = new ModuleType[]{ModuleType.COMMON_RFCARDREADER};
-                S_DeviceInfo.getInstance().getCardRead().openCardReader(openReaders, false, timeout, TimeUnit.SECONDS, new DeviceEventListener<K21CardReaderEvent>() {
-                    @Override
-                    public void onEvent(K21CardReaderEvent openCardReaderEvent, Handler handler) {
-                        OpenCardReaderResult cardResult = openCardReaderEvent.getOpenCardReaderResult();
-                        CommonCardType[] openedModuleTypes = null;
-                        if (openCardReaderEvent.isFailed()) {
-                            if (openCardReaderEvent.getException() instanceof ProcessTimeoutException) {
-                                ToastUtils.showMessage(context.getString(R.string.msg_timeout) + "\r\n", MessageTag.NORMAL);
-                            }
-                            ToastUtils.showMessage(context.getString(R.string.msg_reader_open_failed) + "\r\n", MessageTag.NORMAL);
-                        }
-                        if (cardResult == null || (openedModuleTypes = cardResult.getResponseCardTypes()) == null || openedModuleTypes.length <= 0) {
-                            ToastUtils.showMessage(context.getString(R.string.msg_card_info_null) + "\r\n", MessageTag.ERROR);
-                        } else if (openCardReaderEvent.isSuccess()) {
-                            String showMsg = TestActivity.doRead();
-                            SoundPoolImpl.getInstance().play();
-                            if (!TextUtils.isEmpty(showMsg) && showMsg.length() > 18) {
-                                if (showMsg.startsWith("0")) {
-                                    showMsg = showMsg.substring(1);
-                                }
-                                if (showMsg.length() > 17) {
-                                    String code = showMsg.substring(0, 17);
-                                    doSaoma("dw00" + code);
-                                }
-                            }
-                            ToastUtils.showMessage(showMsg + "\r\n", MessageTag.NORMAL);
-                        } else if (openCardReaderEvent.isUserCanceled()) {
-                            ToastUtils.showMessage(context.getString(R.string.msg_cancel_open_reader) + "\r\n", MessageTag.NORMAL);
-                        }
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } finally {
-                            doCard();
-                        }
+                String showMsg = TestActivity.doRead();
+                SoundPoolImpl.getInstance().play();
+                if (!TextUtils.isEmpty(showMsg) && showMsg.length() > 18) {
+                    if (showMsg.startsWith("0")) {
+                        showMsg = showMsg.substring(1);
                     }
-
-                    @Override
-                    public Handler getUIHandler() {
-                        return null;
+                    if (showMsg.length() > 17) {
+                        String code = showMsg.substring(0, 17);
+                        doSaoma("dw00" + code);
                     }
-                }, SearchCardRule.RFCARD_FIRST);
+                }
+                ToastUtils.showMessage(showMsg + "\r\n", MessageTag.NORMAL);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    doCard();
+                }
             }
         }).start();
 
