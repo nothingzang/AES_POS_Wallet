@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorStyle">#333333</color>
+    <color name="colorTextStyle">#BCA658</color>
+    <!--白色模块 -->
+    <color name="white">#fff</color>
+    <!--侧拉页面背景的颜色-->
+    <color name="light_white">#f2f4f5</color>
+    <!--黑色模块 -->
+    <color name="black">#FF000000</color>
+    <color name="light_black">#333333</color>
+    <color name="black_text">#424843</color>
+    <!--蓝色模块 -->
+    <color name="blue">#0000ff</color>
+    <!-- 主题蓝 -->
+    <color name="main_blue">#3F51B5</color>
+    <color name="light_blue">#2595e1</color>
+    <!-- 状态栏 -->
+    <color name="status_bar_blue">#303F9F</color>
+
+    <!--黄色模块 -->
+    <color name="yellow">#ffc801</color>
+    <color name="light_yellow">#fff3c9</color>
+
+    <!--红色模块 -->
+    <color name="red">#FF0000</color>
+
+    <!-- IM 81 -->
+    <color name="IM81_common_bg">#f1f2f7</color>
+    <color name="IM81_title_bg">#25CBC1</color>
+    <color name="IM81_tab_bg">#e0e7e9</color>
+    <color name="IM81_tab_select">#f1f2f7</color>
+    <color name="IM81_tab_divider">#c7d4db</color>
+
+    <color name="view_bg_red">#f4878c</color>
+    <color name="view_bg_blue">#1db2d2</color>
+
+    <color name="title_bar">#3A97F4</color>
+    <color name="btn_gray">#ffd4d4d4</color>
+    <color name="text_color">#2d2d30</color>
+</resources>
